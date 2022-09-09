@@ -7,12 +7,12 @@ import openai
 #OpenAI API key
 aienv = os.getenv('OPENAI_KEY')
 if aienv == None:
-    openai.api_key = "Open AI Key"
+    openai.api_key = "OpenAI Key"
 else:
     openai.api_key = aienv
 print(aienv)
 
-start_sequence = "\nAI:"
+start_sequence = "\nKotha:"
 restart_sequence = "\nHuman: "
 
 app = Flask(__name__)
@@ -29,13 +29,13 @@ def sms_reply():
     # Get response from openai
     response = openai.Completion.create(
     model="text-davinci-002",
-    prompt="The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nAI: I am an AI created by OpenAI. How can I help you today?\nHuman: ",
+    prompt=f"The following is a conversation with Kotha. She is your virtual friend. She is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nKotha: I am Kotha, your virtual friend created by MD Kawsar Ali. He is a student at Bangabandhu Sheikh Mujibur Rahman Science and Technology University at the department of Pharmacy. How can I help you today?\nHuman: {msg}\nKotha: ",
     temperature=0.9,
     max_tokens=150,
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0.6,
-    stop=[" Human:", " AI:"]
+    stop=[" Human:", " Kotha:"]
     )
     answer = response.choices[0].text
     # Create reply
